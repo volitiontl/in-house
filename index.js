@@ -7,11 +7,14 @@ var components = require('./src/core_components')
 var e = require('./src/event')
 var event = new e
 var watch = require('./src/syncData')
-var router=require('./src/router')
+var router = require('./src/router')
+
+var lookup = {}
 
 
-module.exports = {
+var m = {
   render: function (id, json, stage) {
+    lookup[id] = {div: stage}
     _.forEach(json, function (value, key) {
       var type = typeof value;
       var sub_id = key;
@@ -52,9 +55,21 @@ module.exports = {
       }
       if (!components[type]) type = typeof _value;
       var _id = id + "_" + _key + "_" + components[type].map.id;
-      if(components[type].map.readOnly) return
+      if (components[type].map.readOnly) return
       document.getElementById(_id)[components[type].map.valuePath] = _value
     })
   },
-  addRoute:router.addRoute
+  destroy: function (name) {
+    var stageId = lookup[name].div
+    event.stopListening(stageId)
+    $("#" + stageId).html("")
+    var el = document.getElementById(stageId),
+      elClone = el.cloneNode(true);
+    el.parentNode.replaceChild(elClone, el);
+
+  },
+  addRoute: router.addRoute
 }
+
+window.inHouse = m;
+module.exports = m;

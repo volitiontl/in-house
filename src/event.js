@@ -6,8 +6,10 @@ function listener() {
 }
 
 listener.prototype.startListening = function (stage) {
+  this.listeners=[];
   _.forEach(this.events, function (event) {
     document.getElementById(stage).addEventListener(event, this.handleEvent.bind(this));
+    this.listeners.push({div:stage,event:event});
   }.bind(this))
 };
 
@@ -20,6 +22,9 @@ listener.prototype.addListener = function (param) {
   }
 };
 
+listener.prototype.stopListening=function(stage){
+
+};
 
 listener.prototype.handleEvent = function (e) {
 

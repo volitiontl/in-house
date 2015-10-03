@@ -1,0 +1,67 @@
+<html>
+<head></head>
+<body>
+<div id="shortcuts">
+    <a href="#one">one</a><br>
+    <a href="#two">two</a><br>
+    <a href="#three">three</a><br>
+    <a href="#hello">hello</a><br>
+</div>
+
+<div id="stage" style="min-width:100px;min-height:100px;background-color: lightgrey">
+
+</div>
+
+<script src="in-house.js"></script>
+<script>
+    var p=require('bluebird')
+    var _=require('lodash')
+
+    var exec=require('child_process').execSync
+
+    dataone={
+        name:"tony",
+        pushups:0,
+        alive:true,
+        jump:function(){
+            exec("say jumping")
+            if(parseInt(dataone.pushups)>5){
+                alert("too much jumping")
+                dataone.alive=false
+            }else{
+                dataone.pushups+=1;
+            }
+        },
+        look:function(){
+            exec("say look")
+        }
+    };
+
+    hello={
+        hello:function(){
+            exec("say hello")
+        }
+    };
+
+
+    inHouse.addRoute("one",function(){
+        inHouse.render("dataone",dataone,"stage")
+    },function(){
+        inHouse.destroy("dataone")
+    })
+
+
+    inHouse.addRoute("hello",function(){
+        inHouse.render("helloworld",hello,"stage")
+    },function(){
+        inHouse.destroy("helloworld")
+    })
+
+
+</script>
+
+
+
+
+</body>
+</html>
