@@ -18,6 +18,7 @@
   "homepage": "https://github.com/volitiontl/in-house#readme",
   "dependencies": {
     "bluebird": "^2.10.2",
+    "jquery": "^2.1.4",
     "lodash": "^3.10.1"
   }
 }

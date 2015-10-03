@@ -1,0 +1,10 @@
+{
+  "name": "in-house",
+  "main": "index.js",
+  "version": "0.0.0",
+  "homepage": "https://github.com/volitiontl/in-house",
+  "authors": [
+    "Tony Le"
+  ],
+  "license": "MIT"
+}
